@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEditorInternal;
-using System.Threading;
+//using UnityEditorInternal;
+//using System.Threading;
 
 
 public class PlayerController : MonoBehaviour
