@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEditorInternal;
+using System.Threading;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,13 +22,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject winTextObject;
 
-    public GameObject CubeTextObject;
-
+    public GameObject OuchTextObject;
 
 
     public TextMeshProUGUI countText;
 
-    public TextMeshProUGUI CubeText;
+    
     void Start()
     {
         winTextObject.SetActive(false);
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         count = 0;
         rb = GetComponent<Rigidbody>();
         SetCountText();
-        CubeTextObject.SetActive(false);
+        OuchTextObject.SetActive(false);
     }
     void OnMove(InputValue movementValue)
     {
@@ -64,10 +65,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Cube"))
+        if (other.gameObject.CompareTag("Ouch"))
         {
-            //other.gameObject.SetActive(true);
-            CubeTextObject.SetActive(true);
+            OuchTextObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("PickUp"))
         {

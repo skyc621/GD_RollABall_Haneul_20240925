@@ -8,6 +8,7 @@ TagManager:
   - PickUp
   - Happy
   - Cube
+  - Ouch
   layers:
   - Default
   - TransparentFX
