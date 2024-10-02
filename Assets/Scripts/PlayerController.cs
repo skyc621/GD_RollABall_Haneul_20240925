@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private int count;
 
+    private int HP = 100;
 
     private Rigidbody rb;
 
@@ -25,8 +26,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject OuchTextObject;
 
+    public GameObject PlayerObject;
+
 
     public TextMeshProUGUI countText;
+
+    public TextMeshProUGUI HPText;
     
     IEnumerator Delay()
     {
@@ -42,6 +47,7 @@ public class PlayerController : MonoBehaviour
         count = 0;
         rb = GetComponent<Rigidbody>();
         SetCountText();
+        SetHPText();
         OuchTextObject.SetActive(false);
     }
     void OnMove(InputValue movementValue)
@@ -51,7 +57,15 @@ public class PlayerController : MonoBehaviour
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
+    void SetHPText()
+    {
+        HPText.text = "HP: " + HP.ToString();
 
+        if (HP <= 0) 
+        {
+            PlayerObject.SetActive(false);
+        }
+    }
     void SetCountText()
     {
         countText.text = "Count:" + count.ToString();
@@ -74,6 +88,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ouch"))
         {
             OuchTextObject.SetActive(true);
+
+            HP -= 25;
+
+            SetHPText() ;
 
             StartCoroutine(Delay());
         }
