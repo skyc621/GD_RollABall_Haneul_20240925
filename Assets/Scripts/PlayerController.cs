@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour
         if (HP <= 0) 
         {
             DeadText.SetActive(true);
-            PlayerObject.SetActive(false);
+
+            
+            //PlayerObject.SetActive(false);
         }
     }
     void SetCountText()
@@ -83,8 +85,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        if (HP > 0) 
+        {
+            Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+            rb.AddForce(movement * speed);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
