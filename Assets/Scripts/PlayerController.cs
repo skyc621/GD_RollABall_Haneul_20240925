@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     private int count;
 
     
-
     private Rigidbody rb;
 
     private float movementX;
@@ -67,8 +66,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Cube"))
         {
-            other.gameObject.SetActive(true);
-            
+            //other.gameObject.SetActive(true);
+            CubeTextObject.SetActive(true);
         }
         if (other.gameObject.CompareTag("PickUp"))
         {
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-
+    
 
 
 }
