@@ -28,11 +28,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject PlayerObject;
 
+    public GameObject DeadText;
+
 
     public TextMeshProUGUI countText;
 
     public TextMeshProUGUI HPText;
     
+
     IEnumerator Delay()
     {
         yield return new WaitForSecondsRealtime(0.5f);
@@ -42,7 +45,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         winTextObject.SetActive(false);
-
+        DeadText.SetActive(false);
 
         count = 0;
         rb = GetComponent<Rigidbody>();
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
         if (HP <= 0) 
         {
+            DeadText.SetActive(true);
             PlayerObject.SetActive(false);
         }
     }
