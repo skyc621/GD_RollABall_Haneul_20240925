@@ -6,13 +6,14 @@ using TMPro;
 using UnityEditorInternal;
 using System.Threading;
 
+
 public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
     private int count;
 
-    
+
     private Rigidbody rb;
 
     private float movementX;
@@ -26,12 +27,17 @@ public class PlayerController : MonoBehaviour
 
 
     public TextMeshProUGUI countText;
-
     
+    IEnumerator Delay()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        OuchTextObject.SetActive(false);
+    }
+
     void Start()
     {
         winTextObject.SetActive(false);
-        
+
 
         count = 0;
         rb = GetComponent<Rigidbody>();
@@ -68,16 +74,21 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ouch"))
         {
             OuchTextObject.SetActive(true);
+
+            StartCoroutine(Delay());
         }
+
+
+
         if (other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
             count = count + 1;
             SetCountText();
         }
-        
+
     }
-    
+
 
 
 }
