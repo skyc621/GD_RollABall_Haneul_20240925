@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private int count;
 
-    private bool Happy = false;
+    
 
     private Rigidbody rb;
 
@@ -21,21 +21,22 @@ public class PlayerController : MonoBehaviour
 
     public GameObject winTextObject;
 
-    public GameObject HappyTextObject;
+    public GameObject CubeTextObject;
 
 
 
     public TextMeshProUGUI countText;
 
-    public TextMeshProUGUI HappyText;
+    public TextMeshProUGUI CubeText;
     void Start()
     {
         winTextObject.SetActive(false);
-        //HappyTextObject.SetActive(false);
+        
 
         count = 0;
         rb = GetComponent<Rigidbody>();
         SetCountText();
+        CubeTextObject.SetActive(false);
     }
     void OnMove(InputValue movementValue)
     {
@@ -53,20 +54,8 @@ public class PlayerController : MonoBehaviour
         {
             winTextObject.SetActive(true);
         }
-        //if (Happy == true)
-        //{
-        //    HappyTextObject.SetActive(true);
-        //}
-    }
 
-    //void SetHappyText()
-    //{
-    //    if (Happy == true)
-    //    {
-    //        HappyTextObject.SetActive(true);
-    //    }
-        
-    //}
+    }
 
     private void FixedUpdate()
     {
@@ -76,9 +65,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Happy"))
+        if (other.gameObject.CompareTag("Cube"))
         {
-            Happy = true;
+            other.gameObject.SetActive(true);
+            
         }
         if (other.gameObject.CompareTag("PickUp"))
         {
@@ -86,8 +76,7 @@ public class PlayerController : MonoBehaviour
             count = count + 1;
             SetCountText();
         }
-        //other.gameObject.SetActive(false);
-        //count = count + 1;
+        
     }
 
 
