@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
 
     public TextMeshProUGUI HPText;
-    
+
 
     IEnumerator Delay()
     {
@@ -64,11 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         HPText.text = "HP: " + HP.ToString();
 
-        if (HP <= 0) 
+        if (HP <= 0)
         {
             DeadText.SetActive(true);
 
-            
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
             //PlayerObject.SetActive(false);
         }
     }
@@ -86,12 +86,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (HP > 0) 
-        {
-            Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-            rb.AddForce(movement * speed);
-        }
-        
+
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        rb.AddForce(movement * speed);
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
             HP -= 25;
 
-            SetHPText() ;
+            SetHPText();
 
             StartCoroutine(Delay());
         }
@@ -122,11 +121,24 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            OuchTextObject.SetActive(true);
+
+            HP -= 25;
+
+            SetHPText();
+
+            StartCoroutine(Delay());
+
             
-            Destroy(gameObject);
-            
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            if (HP < 0)
+            {
+                Destroy(gameObject);
+
+                winTextObject.gameObject.SetActive(true);
+                winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+
+            }
+
         }
     }
 
